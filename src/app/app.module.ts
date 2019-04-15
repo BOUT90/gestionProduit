@@ -10,10 +10,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContentComponent } from './content/content.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProduitService } from './produit/produit.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ProduitResolver } from './produit/produit.resolver';
+
 
 const appRoutes: Routes = [
   { path: 'produit',
-    component: ProduitComponent
+    component: ProduitComponent,
+    resolve: {
+      produits : ProduitResolver
+    }
   },
   { path: 'dashboard',
    component: DashboardComponent
@@ -50,9 +58,11 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [ProduitMocService],
+  providers: [ProduitMocService, ProduitService, ProduitResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

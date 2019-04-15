@@ -1,4 +1,4 @@
-import { Produit } from './../shared/produit';
+import { Produit } from '../shared/produit';
 import { Injectable } from '@angular/core';
 
 
