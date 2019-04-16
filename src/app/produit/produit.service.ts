@@ -30,7 +30,7 @@ export class ProduitService {
     return this.http.put(API_URLS.produit_url, p);
   }
 
-  public deleteProduit(ref: string): Observable<any> {
-    return this.http.delete(API_URLS.produit_url + '/' + ref);
+  public deleteProduit(id: number): Observable<any> {
+    return this.http.delete(API_URLS.produit_url + '/${id}');
   }
 }

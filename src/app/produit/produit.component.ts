@@ -74,8 +74,8 @@ export class ProduitComponent implements OnInit {
   }
 
   deleteProduit() {
-    console.log(this.selectedProduit.ref);
-    this.prduitService.deleteProduit(this.selectedProduit.ref).subscribe(
+    console.log(this.selectedProduit.id);
+    this.prduitService.deleteProduit(this.selectedProduit.id).subscribe(
       res => {
         this.initProduit();
         this.loadProduits();
