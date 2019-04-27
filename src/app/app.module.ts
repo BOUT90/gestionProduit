@@ -10,38 +10,46 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContentComponent } from './content/content.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProduitService } from './produit/produit.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProduitResolver } from './produit/produit.resolver';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { AppService } from './app.service';
 
 
 const appRoutes: Routes = [
-  { path: 'produit',
-    component: ProduitComponent,
-    resolve: {
-      produits : ProduitResolver
-    }
+  { path: 'login',
+   component: LoginComponent
   },
-  { path: 'dashboard',
-   component: DashboardComponent
-},
+  { path: 'home',
+   component: HomeComponent,
+   children: [
+            { path: 'produit',
+            component: ProduitComponent,
 
-  // { path: 'users',
-  //   component: UserListComponent
-  // },
-  // { path: 'new-user',
-  //   component: NewUserComponent
-  // },
+                resolve: {
+                  produits : ProduitResolver
+                },
+
+            outlet: 'contentOutlet'
+            },
+
+            { path: 'dashboard',
+            component: DashboardComponent,
+            outlet: 'contentOutlet'
+            },
+   ]
+  },
+
   { path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
-  // { path: 'notFound',
-  //   component: FourOhFourComponent
-  // },
+
   { path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'home'
   }
 ];
 
@@ -53,7 +61,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     SidebarComponent,
     ContentComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -61,8 +71,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
-  providers: [ProduitMocService, ProduitService, ProduitResolver],
+  providers: [ProduitMocService, ProduitService, ProduitResolver, AppService, NgModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

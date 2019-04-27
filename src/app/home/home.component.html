@@ -1,0 +1,14 @@
+<div class="row pl-4 pt-4">
+  <div class="col-lg-2" *ngIf="!showHideSidebar" >
+    <app-sidebar></app-sidebar>
+  </div>
+  <div [class.col-lg-10]="!showHideSidebar" [class.col-lg-12]="showHideSidebar">
+
+    <app-navbar
+    [showSideBar]= "showHideSidebar"
+    (showSideBarChange) = "onShowSideBarChange($event)"
+    ></app-navbar>
+
+    <app-content></app-content>
+  </div>
+</div>

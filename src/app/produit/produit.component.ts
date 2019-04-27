@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ProduitComponent implements OnInit {
 
   produits: Produit[];
-  operation: 'add';
+  operation = 'add';
   selectedProduit: Produit;
   produitForm: FormGroup;
 
